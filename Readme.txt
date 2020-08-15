@@ -42,3 +42,22 @@ pip freese >name.txt
 
 // Crear super usuario
 python manage.py createsuperuser
+
+
+-----Serializers leer por medio de api los productos---
+class ProductsListAPI (ListCreateAPIView):
+    serializer_class = ProductSerializer 
+    queryset = Products.objects.all()  
+    
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Products
+        fields='__all__'
+
+from django.db import models
+
+class Products(models.Model):
+    name = models.CharField('NOMBRE/DESC PRODUCTO', max_length=60)
+    category = models.CharField('Categoria', max_length=20)
+    ubication = models.CharField('Ubicacion', max_length=60)
+    lote = models.CharField('Lote', max_length=20)
